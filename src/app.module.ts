@@ -1,19 +1,19 @@
 import { NestjsGrammyModule } from '@grammyjs/nestjs';
 import { Module } from '@nestjs/common';
-import { ConfigModule } from '@nestjs/config';
+import { ConfigModule, ConfigService } from '@nestjs/config';
 import { BotModule } from './bot/bot.module';
 
 @Module({
   imports: [
     ConfigModule.forRoot({ isGlobal: true }),
-    NestjsGrammyModule.forRoot({
-      botName: process.env['TELEGRAM_BOT_NAME'],
-      token: process.env['TELEGRAM_BOT_TOKEN'],
-      include: [BotModule],
+    NestjsGrammyModule.forRootAsync({
+      imports: [ConfigModule, BotModule],
+      useFactory: (configService: ConfigService) => ({
+        token: configService.get<string>('TELEGRAM_BOT_TOKEN'),
+        botName: configService.get<string>('TELEGRAM_BOT_NAME'),
+      }),
+      inject: [ConfigService],
     }),
-    BotModule,
   ],
-  controllers: [],
-  providers: [],
 })
 export class AppModule {}
