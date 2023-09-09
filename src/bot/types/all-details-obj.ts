@@ -1,9 +1,12 @@
 export interface AllDetailsObj {
   cycle: string;
-  eol: string;
+  codename?: string;
+  eol: string | boolean;
   latest: string;
   latestReleaseDate: string;
-  lts: boolean;
+  lts: boolean | string;
   releaseDate: string;
   support: string;
+  extendedSupport?: boolean;
+  discontinued?: string | boolean;
 }
