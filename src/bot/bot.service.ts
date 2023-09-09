@@ -21,7 +21,7 @@ export class BotService {
   cycleDetailOfProduct(
     product: string,
     cycle: string,
-  ): Observable<AxiosResponse<CycleDetailsObj[]>> {
+  ): Observable<AxiosResponse<CycleDetailsObj>> {
     return this.httpService.get(`${API_ENDPOINT}/${product}/${cycle}.json`);
   }
 }
