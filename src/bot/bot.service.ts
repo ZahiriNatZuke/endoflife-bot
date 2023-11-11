@@ -37,7 +37,7 @@ export class BotService {
         {
           parse_mode: 'HTML',
         },
-      );
+      ).then();
       return EMPTY;
     };
   }
@@ -121,7 +121,7 @@ export class BotService {
 
   private generateBoolOrStr(input: boolean | string): string {
     return typeof input === 'boolean'
-      ? `<b>${input ? '✅' : '❌'}</b>`
+      ? `<b>${input ? '❌' : '✅'}</b>`
       : `<code>${input}</code>`;
   }
 
